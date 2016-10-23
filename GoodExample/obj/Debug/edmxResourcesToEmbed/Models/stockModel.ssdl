@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\STORE.MDF.dbo.catagory_tb' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="catagory_tb">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catagory_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="credit_tb">
+    <Key>
+      <PropertyRef Name="credit_id" />
+    </Key>
+    <Property Name="credit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="debit_amount" Type="float" />
+    <Property Name="credit_amount" Type="float" />
+    <Property Name="customer_id" Type="int" />
+    <Property Name="bill_no" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'D:\STORE.MDF.dbo.customer_tb' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="customer_tb">
+          <Property Name="customer_name" Type="char" MaxLength="100" />
+          <Property Name="customer_id" Type="float" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'D:\STORE.MDF.dbo.price_tb' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="price_tb">
+          <Property Name="barCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="cost_price" Type="float" />
+          <Property Name="margin" Type="float" />
+          <Property Name="selling_price" Type="float" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\STORE.MDF.dbo.salesBillingPrice_tb' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="salesBillingPrice_tb">
+    <Key>
+      <PropertyRef Name="bill_no" />
+    </Key>
+    <Property Name="bill_no" Type="float" Nullable="false" />
+    <Property Name="discount" Type="float" />
+    <Property Name="net_total" Type="float" />
+  </EntityType>
+  <EntityType Name="salesDetail_tb">
+    <Key>
+      <PropertyRef Name="bill_ID" />
+    </Key>
+    <Property Name="bill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bill_no" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" />
+    <Property Name="sales_product_des" Type="nvarchar" MaxLength="100" />
+    <Property Name="barCode" Type="nvarchar" MaxLength="500" />
+    <Property Name="qty" Type="float" />
+    <Property Name="sales_price" Type="float" />
+    <Property Name="total_price" Type="float" />
+    <Property Name="vendor" Type="nvarchar" MaxLength="150" />
+    <Property Name="unit" Type="nchar" MaxLength="50" />
+    <Property Name="user_id" Type="int" />
+  </EntityType>
+  <EntityType Name="stock_tb">
+    <Key>
+      <PropertyRef Name="barCode" />
+    </Key>
+    <Property Name="barCode" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="item_code" Type="nvarchar" MaxLength="150" />
+    <Property Name="product_des" Type="nvarchar" MaxLength="255" />
+    <Property Name="catagory" Type="nvarchar" MaxLength="255" />
+    <Property Name="unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="vendor" Type="nvarchar" MaxLength="150" />
+    <Property Name="qty_left" Type="float" />
+  </EntityType>
+  <EntityType Name="users_tb">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+    <Property Name="uname" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="vendor_tb">
+    <Key>
+      <PropertyRef Name="vendor_id" />
+    </Key>
+    <Property Name="vendor_id" Type="float" Nullable="false" />
+    <Property Name="vendor_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" />
+    <Property Name="number" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+error 6004: The table 'D:\STORE.MDF.dbo.price_tb' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_price_tb_stock_tb" />-->
+  <Association Name="FK_salesDetail_tb_salesDetail_tb">
+    <End Role="salesDetail_tb" Type="Self.salesDetail_tb" Multiplicity="1" />
+    <End Role="salesDetail_tb1" Type="Self.salesDetail_tb" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="salesDetail_tb">
+        <PropertyRef Name="bill_ID" />
+      </Principal>
+      <Dependent Role="salesDetail_tb1">
+        <PropertyRef Name="bill_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_tb_users_tb">
+    <End Role="users_tb" Type="Self.users_tb" Multiplicity="1" />
+    <End Role="users_tb1" Type="Self.users_tb" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="users_tb">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="users_tb1">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreModelStoreContainer">
+    <EntitySet Name="credit_tb" EntityType="Self.credit_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="salesDetail_tb" EntityType="Self.salesDetail_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="stock_tb" EntityType="Self.stock_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users_tb" EntityType="Self.users_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vendor_tb" EntityType="Self.vendor_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="catagory_tb" EntityType="Self.catagory_tb" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[catagory_tb].[cat_id] AS [cat_id], 
+[catagory_tb].[catagory_name] AS [catagory_name]
+FROM [dbo].[catagory_tb] AS [catagory_tb]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="salesBillingPrice_tb" EntityType="Self.salesBillingPrice_tb" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[salesBillingPrice_tb].[bill_no] AS [bill_no], 
+[salesBillingPrice_tb].[discount] AS [discount], 
+[salesBillingPrice_tb].[net_total] AS [net_total]
+FROM [dbo].[salesBillingPrice_tb] AS [salesBillingPrice_tb]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_salesDetail_tb_salesDetail_tb" Association="Self.FK_salesDetail_tb_salesDetail_tb">
+      <End Role="salesDetail_tb" EntitySet="salesDetail_tb" />
+      <End Role="salesDetail_tb1" EntitySet="salesDetail_tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_tb_users_tb" Association="Self.FK_users_tb_users_tb">
+      <End Role="users_tb" EntitySet="users_tb" />
+      <End Role="users_tb1" EntitySet="users_tb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

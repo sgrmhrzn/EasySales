@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="creditAccount_tb">
+    <Key>
+      <PropertyRef Name="credit_id" />
+    </Key>
+    <Property Name="credit_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="bill_no" Type="Int32" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="voucher_no" Type="Int32" />
+    <Property Name="debit_amount" Type="Double" />
+    <Property Name="credit_amount" Type="Double" />
+    <Property Name="balance" Type="Double" />
+    <Property Name="narration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="customer_tb">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="price_tb">
+    <Key>
+      <PropertyRef Name="price_id" />
+    </Key>
+    <Property Name="cost_price" Type="Double" />
+    <Property Name="margin" Type="Double" />
+    <Property Name="selling_price" Type="Double" />
+    <Property Name="stock_id" Type="Int32" Nullable="false" />
+    <Property Name="price_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="stock_tb" Relationship="Self.FK_price_tb_stock_tb" FromRole="price_tb" ToRole="stock_tb" />
+  </EntityType>
+  <EntityType Name="salesDetail_tb">
+    <Key>
+      <PropertyRef Name="bill_ID" />
+    </Key>
+    <Property Name="bill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_no" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="sales_product_des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="barCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="qty" Type="Double" />
+    <Property Name="sales_price" Type="Double" />
+    <Property Name="total_price" Type="Double" />
+    <Property Name="vendor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="unit" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="user_id" Type="Int32" />
+    <NavigationProperty Name="salesDetail_tb1" Relationship="Self.FK_salesDetail_tb_salesDetail_tb" FromRole="salesDetail_tb" ToRole="salesDetail_tb1" />
+    <NavigationProperty Name="salesDetail_tb2" Relationship="Self.FK_salesDetail_tb_salesDetail_tb" FromRole="salesDetail_tb1" ToRole="salesDetail_tb" />
+  </EntityType>
+  <EntityType Name="stock_tb">
+    <Key>
+      <PropertyRef Name="stock_id" />
+    </Key>
+    <Property Name="barCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="item_code" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="product_des" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="catagory" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vendor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="qty_left" Type="Double" />
+    <Property Name="stock_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="price_tb" Relationship="Self.FK_price_tb_stock_tb" FromRole="stock_tb" ToRole="price_tb" />
+  </EntityType>
+  <EntityType Name="users_tb">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="uname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="users_tb1" Relationship="Self.FK_users_tb_users_tb" FromRole="users_tb" ToRole="users_tb1" />
+    <NavigationProperty Name="users_tb2" Relationship="Self.FK_users_tb_users_tb" FromRole="users_tb1" ToRole="users_tb" />
+  </EntityType>
+  <EntityType Name="vendor_tb">
+    <Key>
+      <PropertyRef Name="vendor_id" />
+    </Key>
+    <Property Name="vendor_id" Type="Double" Nullable="false" />
+    <Property Name="vendor_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="number" Type="Double" />
+  </EntityType>
+  <EntityType Name="cashAccount_tb">
+    <Key>
+      <PropertyRef Name="cash_id" />
+    </Key>
+    <Property Name="cash_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="bill_no" Type="Int32" />
+    <Property Name="voucher_no" Type="Int32" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="debit_amount" Type="Double" />
+    <Property Name="credit_amount" Type="Double" />
+    <Property Name="balance" Type="Double" />
+    <Property Name="narration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="catagory_tb">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catagory_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="salesBillingPrice_tb">
+    <Key>
+      <PropertyRef Name="bill_no" />
+    </Key>
+    <Property Name="bill_no" Type="Double" Nullable="false" />
+    <Property Name="discount" Type="Double" />
+    <Property Name="net_total" Type="Double" />
+  </EntityType>
+  <Association Name="FK_price_tb_stock_tb">
+    <End Role="stock_tb" Type="Self.stock_tb" Multiplicity="1" />
+    <End Role="price_tb" Type="Self.price_tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stock_tb">
+        <PropertyRef Name="stock_id" />
+      </Principal>
+      <Dependent Role="price_tb">
+        <PropertyRef Name="stock_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_salesDetail_tb_salesDetail_tb">
+    <End Role="salesDetail_tb" Type="Self.salesDetail_tb" Multiplicity="1" />
+    <End Role="salesDetail_tb1" Type="Self.salesDetail_tb" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="salesDetail_tb">
+        <PropertyRef Name="bill_ID" />
+      </Principal>
+      <Dependent Role="salesDetail_tb1">
+        <PropertyRef Name="bill_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_tb_users_tb">
+    <End Role="users_tb" Type="Self.users_tb" Multiplicity="1" />
+    <End Role="users_tb1" Type="Self.users_tb" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="users_tb">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="users_tb1">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreEntitiesModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="creditAccount_tb" EntityType="Self.creditAccount_tb" />
+    <EntitySet Name="customer_tb" EntityType="Self.customer_tb" />
+    <EntitySet Name="price_tb" EntityType="Self.price_tb" />
+    <EntitySet Name="salesDetail_tb" EntityType="Self.salesDetail_tb" />
+    <EntitySet Name="stock_tb" EntityType="Self.stock_tb" />
+    <EntitySet Name="users_tb" EntityType="Self.users_tb" />
+    <EntitySet Name="vendor_tb" EntityType="Self.vendor_tb" />
+    <EntitySet Name="cashAccount_tb" EntityType="Self.cashAccount_tb" />
+    <EntitySet Name="catagory_tb" EntityType="Self.catagory_tb" />
+    <EntitySet Name="salesBillingPrice_tb" EntityType="Self.salesBillingPrice_tb" />
+    <AssociationSet Name="FK_price_tb_stock_tb" Association="Self.FK_price_tb_stock_tb">
+      <End Role="stock_tb" EntitySet="stock_tb" />
+      <End Role="price_tb" EntitySet="price_tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_salesDetail_tb_salesDetail_tb" Association="Self.FK_salesDetail_tb_salesDetail_tb">
+      <End Role="salesDetail_tb" EntitySet="salesDetail_tb" />
+      <End Role="salesDetail_tb1" EntitySet="salesDetail_tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_tb_users_tb" Association="Self.FK_users_tb_users_tb">
+      <End Role="users_tb" EntitySet="users_tb" />
+      <End Role="users_tb1" EntitySet="users_tb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

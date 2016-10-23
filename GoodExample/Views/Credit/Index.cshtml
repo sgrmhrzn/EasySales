@@ -1,0 +1,113 @@
+﻿<div ng-controller="creditCntrl">
+
+    <div class="pageTitle"><h4> Credit Record Details</h4></div>
+
+    <form class="searchForm" ng-submit="submit()">
+        Customer:<input ng-model="filter.customer">
+        Bill No:<input ng-model="filter.billNo">
+        Voucher No:<input ng-model="filter.voucher">
+        From:<input type="date" ng-model="FromDate" />
+        To:<input type="date" ng-model="ToDate" />
+        Data Limits:<input type="text" ng-model="pageLimit" />
+        <button type="submit" class="btn btn-primary" id="submit" value="Submit">Search</button>
+    </form>
+
+    <div class="divList">
+
+        <table cellpadding="12" class="table table-bordered table-hover">
+            <tr>
+                <td><b>#</b></td>
+                <td><b>Date</b></td>
+                <td><b>Bill No</b></td>
+                <td><b>Voucher</b></td>
+                <td><b>Customer</b></td>
+                <td><b>Narration</b></td>
+                <td><b>Dr.</b></td>
+                <td><b>Cr.</b></td>
+                <td><b>Balance</b></td>
+                @*<td><b>Whole Blc</b></td>*@
+                
+            </tr>
+            <tbody ng-init="total=0">
+                <div id="main-loader" ng-show="loading"><img src="~/Images/loader.gif" /></div>
+                <tr ng-repeat="credit in resultValue = (credits | dateRange : dateStart : dateEnd | filter:{ customers: { customer_name: filter.customer }  || ''} | filter:{bill_no:filter.billNo || ''} | filter:{voucher_no:filter.voucher || ''} ) | pagination: curPage * pageSize | limitTo: pageSize">
+                    <td>
+                        {{serial($index+1)}}
+                    </td>
+                    <td>
+                        {{credit.date.slice(6,-2)  | date:'yyyy-MM-dd' }}
+                    </td>
+                    <td>
+                        {{credit.bill_no}}
+                    </td>
+                    <td>
+                        {{credit.voucher_no}}
+                    </td>
+                    <td>
+                        {{credit.customers.customer_name}}
+                    </td>
+                    <td>
+                        {{credit.narration}}
+                    </td>
+                    <td>
+                        {{credit.debit_amount}}
+                    </td>
+                    <td>
+                        {{credit.credit_amount}}
+                    </td>
+                    <td>
+                        {{calculateBlc(serial($index))}}
+                    </td>
+                    @*<td>
+                        {{credit.balance}}
+                    </td>*@
+
+
+                    @*<td>
+                {{sale.qty * sale.sales_price}}
+            </td>*@
+                </tr>
+                <tr>
+                    <td colspan="6" align="center">
+                        <h4>Total</h4>
+                    </td>
+                    <td>
+                        <h4>{{resultValue | sumOfValue:'debit_amount'}}</h4>
+                        @*<h4>Total Amount:{{resultValue | totalSumPriceQty:'qty':'sales_price'}}</h4>*@
+                    </td>
+                    <td>
+                        <h4>{{resultValue | sumOfValue:'credit_amount'}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{resultValue | sumOfValue:'total_price'}}</h4>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="pagination pagination-centered" ng-show="resultValue.length">
+            <ul class="pagination-controle pagination">
+                <li>
+                    <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+                            ng-click="curPage=curPage-1">
+                        &lt; PREV
+                    </button>
+                </li>
+                <li>
+                    <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-primary"
+                            ng-disabled="curPage >= datalists.length/pageSize - 1"
+                            ng-click="curPage = curPage+1">
+                        NEXT &gt;
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+</div>

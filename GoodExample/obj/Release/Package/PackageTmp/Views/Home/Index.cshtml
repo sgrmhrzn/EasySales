@@ -1,0 +1,166 @@
+﻿
+<div ng-controller="myCntrl">
+   <div class="pageTitle"><h4>Stock Details</h4></div>
+
+    <form class="searchForm" ng-submit="submit()">
+        <a class="btn btn-primary" ng-click="AddUpdateProduct()"><i class="glyphicon glyphicon-plus"></i>Add Product</a>
+        Product Description:<input type="text" ng-model="filterSearchText" />
+        Bar Code: <input type="text" ng-model="filterBarCode" />
+        Item Code:<input type="text" ng-model="filterItemCode" />
+        Category: <input type="text" ng-model="filterCategory" />
+    </form>
+
+
+        <div class="divList">
+            <table cellpadding="12" class="table table-bordered table-hover">
+                <tr>
+                    <td><b>#</b></td>
+                    <td><b>Bar Code</b></td>
+                    <td><b>Item Code</b></td>
+                    <td><b>Description</b></td>
+                    <td><b>Category</b></td>
+                    <td><b>Qty</b></td>
+                    <td><b>Cost</b></td>
+                    <td><b>Selling Price</b></td>
+                    <td><b>Margin</b></td>
+                    <td><b>Action</b></td>
+                </tr>
+                <div id="main-loader" ng-show="loading"><img src="~/Images/loader.gif" /></div>
+                <tr ng-repeat="stock in resultValue =( stocks | filter:{product_des : filterSearchText } |  filter:{barCode : filterBarCode} | filter:{item_code : filterItemCode} |  filter:{catagory : filterCategory} ) | pagination: curPage * pageSize | limitTo: pageSize  ">
+                    <td>
+                        {{serial($index+1)}}
+                    </td>
+                    <td>
+                        {{stock.barCode}}
+                    </td>
+                    <td>
+                        {{stock.item_code}}
+                    </td>
+                    <td>
+                        {{stock.product_des}}
+                    </td>
+                    <td>
+                        {{stock.catagory}}
+                    </td>
+                    <td>
+                        {{stock.qty_left}}
+                    </td>
+                    <td>
+                        {{stock.prices.cost_price}}
+                    </td>
+                    <td>
+                        {{stock.prices.selling_price}}
+                    </td>
+                    <td>
+                        {{stock.prices.margin}}
+                    </td>
+
+                    <td>
+                        <span ng-click="editRecord(stock)" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></span>
+                        <span ng-click="deleteProduct(stock)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="pagination pagination-centered" ng-show="resultValue.length">
+                <ul class="pagination-controle pagination">
+                    <li>
+                        <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+                                ng-click="curPage=curPage-1">
+                            &lt; PREV
+                        </button>
+                    </li>
+                    <li>
+                        <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="curPage >= datalists.length/pageSize - 1"
+                                ng-click="curPage = curPage+1">
+                            NEXT &gt;
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div ng-show="divAddEdit" style="position: absolute;margin: 10% 20%;top: 0px;background-color: aliceblue;border: thin solid gray; width: 800px;padding: 5%;">
+            <p class="divHead">{{Action}} Product</p>
+            <table>
+                <tr>
+                    <td><b>Id</b></td>
+                    <td>
+                        <input type="text" disabled="disabled" ng-model="stockId" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Bar Code</b></td>
+                    <td>
+                        <input type="text" ng-model="barCode" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Item Code</b></td>
+                    <td>
+                        <input type="text" ng-model="itemCode" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>
+                        <input type="text" ng-model="productDes" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><b>Quantity</b></td>
+                    <td>
+                        <input type="text" ng-model="qty" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Category</b></td>
+                    <td>
+                        <select ng-model="category" >
+                            <option value="">---Select---</option>
+                            <option ng-repeat="cat in categories" value="{{cat.catagory_name}}">{{cat.catagory_name}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Vendor</b></td>
+                    <td>
+                        <input type="text" ng-model="vendor" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Cost Price</b></td>
+                    <td>
+                        <input type="text" ng-model="cost_price" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Selling Price</b></td>
+                    <td>
+                        <input type="text" ng-model="selling_price" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Margin</b></td>
+                    <td>
+                        <input type="text" ng-model="margin" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="btn btn-success" ng-click="AddUpdate()"><i class="glyphicon glyphicon-saved"></i>Save</span>
+                        <span class="btn btn-danger" ng-click="divAddEdit = !divAddEdit"><i class="glyphicon glyphicon-remove-circle"></i>Cancel</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</div>

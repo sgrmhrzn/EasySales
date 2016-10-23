@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'C:\USERS\MAHRZ\DOWNLOADS\COMPRESSED\ANGULAJSEXAMPLE\ANGULAJSEXAMPLE\GOODEXAMPLE\APP_DATA\STORE.MDF.dbo.price_tb' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="price_tb">
+          <Property Name="barCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="cost_price" Type="float" />
+          <Property Name="margin" Type="float" />
+          <Property Name="selling_price" Type="float" />
+        </EntityType>-->
+  <EntityContainer Name="StoreModelStoreContainer" />
+</Schema>

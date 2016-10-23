@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.css" type="text/css"/>
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Content/Angular/Module/Module.js"></script>
+    <script src="~/Content/Angular/Stock/StockService.js"></script>
+    <script src="~/Content/Angular/Stock/StockController.js"></script>
+    <script src="~/Content/Angular/Sales/SalesController.js"></script>
+    <script src="~/Content/Angular/Sales/SalesService.js"></script>
+    <script src="~/Content/Angular/Pagination/dirPagination.js"></script>
+    <script src="~/Content/Angular/Credit/CreditController.js"></script>
+    <script src="~/Content/Angular/Credit/CreditService.js"></script>
+
+
+    @Styles.Render("~/Content/css")
+    <style>
+        .body-container{top:50px;position:relative;margin:auto;align-content:center;max-width:1500px;width:100%}
+        .pageTitle{
+            text-align:center;
+            display:block;
+            width:100%;
+            margin:auto;
+        }
+        .searchForm {
+            margin:2% 0;
+        }
+        #main-loader {
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            margin: 16% 0;
+        }
+        .paginationclass {
+            margin: 19px 28px;
+        }
+            .paginationclass span {
+                margin-left: 15px;
+                display: inline-block;
+            }
+        .pagination-controle li {
+            display: inline-block;
+        }
+        .pagination-controle button {
+            font-size: 12px;
+            margin-top: -26px;
+            cursor: pointer;
+        }
+        .pagination {
+            margin: 5px 12px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">EASY SALE</span>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Home">Stock</a></li>
+                    <li><a href="/Sales">Sales</a></li>
+                    <li><a href="/Credit">Credit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <section class="body-container">
+        @RenderBody()
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

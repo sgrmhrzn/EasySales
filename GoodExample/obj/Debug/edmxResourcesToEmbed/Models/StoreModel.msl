@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StoreModelStoreContainer" CdmEntityContainer="StoreEntitiesModel">
+    <EntitySetMapping Name="creditAccount_tb">
+      <EntityTypeMapping TypeName="StoreModel.creditAccount_tb">
+        <MappingFragment StoreEntitySet="creditAccount_tb">
+          <ScalarProperty Name="credit_id" ColumnName="credit_id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="bill_no" ColumnName="bill_no" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="voucher_no" ColumnName="voucher_no" />
+          <ScalarProperty Name="debit_amount" ColumnName="debit_amount" />
+          <ScalarProperty Name="credit_amount" ColumnName="credit_amount" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="narration" ColumnName="narration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer_tb">
+      <EntityTypeMapping TypeName="StoreModel.customer_tb">
+        <MappingFragment StoreEntitySet="customer_tb">
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="price_tb">
+      <EntityTypeMapping TypeName="StoreModel.price_tb">
+        <MappingFragment StoreEntitySet="price_tb">
+          <ScalarProperty Name="cost_price" ColumnName="cost_price" />
+          <ScalarProperty Name="margin" ColumnName="margin" />
+          <ScalarProperty Name="selling_price" ColumnName="selling_price" />
+          <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+          <ScalarProperty Name="price_id" ColumnName="price_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salesDetail_tb">
+      <EntityTypeMapping TypeName="StoreModel.salesDetail_tb">
+        <MappingFragment StoreEntitySet="salesDetail_tb">
+          <ScalarProperty Name="bill_ID" ColumnName="bill_ID" />
+          <ScalarProperty Name="bill_no" ColumnName="bill_no" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="sales_product_des" ColumnName="sales_product_des" />
+          <ScalarProperty Name="barCode" ColumnName="barCode" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="sales_price" ColumnName="sales_price" />
+          <ScalarProperty Name="total_price" ColumnName="total_price" />
+          <ScalarProperty Name="vendor" ColumnName="vendor" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stock_tb">
+      <EntityTypeMapping TypeName="StoreModel.stock_tb">
+        <MappingFragment StoreEntitySet="stock_tb">
+          <ScalarProperty Name="barCode" ColumnName="barCode" />
+          <ScalarProperty Name="item_code" ColumnName="item_code" />
+          <ScalarProperty Name="product_des" ColumnName="product_des" />
+          <ScalarProperty Name="catagory" ColumnName="catagory" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="vendor" ColumnName="vendor" />
+          <ScalarProperty Name="qty_left" ColumnName="qty_left" />
+          <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users_tb">
+      <EntityTypeMapping TypeName="StoreModel.users_tb">
+        <MappingFragment StoreEntitySet="users_tb">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="uname" ColumnName="uname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendor_tb">
+      <EntityTypeMapping TypeName="StoreModel.vendor_tb">
+        <MappingFragment StoreEntitySet="vendor_tb">
+          <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
+          <ScalarProperty Name="vendor_name" ColumnName="vendor_name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="number" ColumnName="number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cashAccount_tb">
+      <EntityTypeMapping TypeName="StoreModel.cashAccount_tb">
+        <MappingFragment StoreEntitySet="cashAccount_tb">
+          <ScalarProperty Name="cash_id" ColumnName="cash_id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="bill_no" ColumnName="bill_no" />
+          <ScalarProperty Name="voucher_no" ColumnName="voucher_no" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="debit_amount" ColumnName="debit_amount" />
+          <ScalarProperty Name="credit_amount" ColumnName="credit_amount" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="narration" ColumnName="narration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="catagory_tb">
+      <EntityTypeMapping TypeName="StoreModel.catagory_tb">
+        <MappingFragment StoreEntitySet="catagory_tb">
+          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+          <ScalarProperty Name="catagory_name" ColumnName="catagory_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salesBillingPrice_tb">
+      <EntityTypeMapping TypeName="StoreModel.salesBillingPrice_tb">
+        <MappingFragment StoreEntitySet="salesBillingPrice_tb">
+          <ScalarProperty Name="bill_no" ColumnName="bill_no" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="net_total" ColumnName="net_total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
