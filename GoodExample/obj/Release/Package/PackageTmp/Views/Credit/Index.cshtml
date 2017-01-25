@@ -12,9 +12,9 @@
         <button type="submit" class="btn btn-primary" id="submit" value="Submit">Search</button>
     </form>
 
-    <div class="divList">
+    <div class="divList" ng-controller="excelCtrl">
+        <table cellpadding="12" class="table table-bordered table-hover" id="tableToExport">
 
-        <table cellpadding="12" class="table table-bordered table-hover">
             <tr>
                 <td><b>#</b></td>
                 <td><b>Date</b></td>
@@ -26,7 +26,7 @@
                 <td><b>Cr.</b></td>
                 <td><b>Balance</b></td>
                 @*<td><b>Whole Blc</b></td>*@
-                
+
             </tr>
             <tbody ng-init="total=0">
                 <div id="main-loader" ng-show="loading"><img src="~/Images/loader.gif" /></div>
@@ -64,8 +64,8 @@
 
 
                     @*<td>
-                {{sale.qty * sale.sales_price}}
-            </td>*@
+                        {{sale.qty * sale.sales_price}}
+                    </td>*@
                 </tr>
                 <tr>
                     <td colspan="6" align="center">
@@ -85,29 +85,32 @@
 
             </tbody>
         </table>
-        <div class="pagination pagination-centered" ng-show="resultValue.length">
-            <ul class="pagination-controle pagination">
-                <li>
-                    <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
-                            ng-click="curPage=curPage-1">
-                        &lt; PREV
-                    </button>
-                </li>
-                <li>
-                    <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-primary"
-                            ng-disabled="curPage >= datalists.length/pageSize - 1"
-                            ng-click="curPage = curPage+1">
-                        NEXT &gt;
-                    </button>
-                </li>
-            </ul>
+            <div class="pagination pagination-centered" ng-show="resultValue.length">
+                <ul class="pagination-controle pagination">
+                    <li>
+                        <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+                                ng-click="curPage=curPage-1">
+                            &lt; PREV
+                        </button>
+                    </li>
+                    <li>
+                        <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="curPage >= datalists.length/pageSize - 1"
+                                ng-click="curPage = curPage+1">
+                            NEXT &gt;
+                        </button>
+                    </li>
+                    <li>
+                        <button ng-click="exportToExcel('#tableToExport')" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-file"></i> Export</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
         </div>
 
-
-
     </div>
-
-</div>

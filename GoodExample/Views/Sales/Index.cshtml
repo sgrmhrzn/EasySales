@@ -13,127 +13,131 @@
     </form>
 
     <div class="divList">
-        
-        <table cellpadding="12" class="table table-bordered table-hover">
-            <tr>
-                <td><b>#</b></td>
-                <td><b>Date</b></td>
-                <td><b>Bill No</b></td>
-                <td><b>Description</b></td>
-                <td><b>Barcode</b></td>
-                <td><b>Unit</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>SP</b></td>
-                <td><b>Total Amount</b></td>
-            </tr>
-            <tbody><div id="main-loader" ng-show="loading"><img src="~/Images/loader.gif" /></div>
-                <tr ng-repeat="sale in resultValue = (sales | dateRange : dateStart : dateEnd | filter:{sales_product_des:filter.description || ''} | filter:{bill_no:filter.billNo || ''} | filter:{barCode:filter.barCode || ''} ) | pagination: curPage * pageSize | limitTo: pageSize" >
-                    <td>
-                        {{serial($index+1)}}
-                    </td>
-                    <td>
-                        {{sale.date.slice(6,-2)  | date:'yyyy-MM-dd' }}
-                    </td>
-                    <td>
-                        {{sale.bill_no}}
-                    </td>
-                    <td>
-                        {{sale.sales_product_des}}
-                    </td>
-                    <td>
-                        {{sale.barCode}}
-                    </td>
-                    <td>
-                        {{sale.unit}}
-                    </td>
-                    <td>
-                        {{sale.qty}}
-                    </td>
-                    <td>
-                        {{sale.sales_price}}
-                    </td>
-                    <td>
-                        {{sale.total_price}}
-                    </td>
-                    @*<td>
-                {{sale.qty * sale.sales_price}}
-            </td>*@
+        <div ng-controller="excelCtrl">
+            <table cellpadding="12" class="table table-bordered table-hover" id="tableToExport">
+                <tr>
+                    <td><b>#</b></td>
+                    <td><b>Date</b></td>
+                    <td><b>Bill No</b></td>
+                    <td><b>Description</b></td>
+                    <td><b>Barcode</b></td>
+                    <td><b>Unit</b></td>
+                    <td><b>Quantity</b></td>
+                    <td><b>SP</b></td>
+                    <td><b>Total Amount</b></td>
                 </tr>
-            <tr>
-                <td colspan="6" align="center">
-                    <h4>Total</h4>
-                </td>
-                <td>
-                    <h4>{{resultValue | sumOfValue:'qty'}}</h4>
-                    @*<h4>Total Amount:{{resultValue | totalSumPriceQty:'qty':'sales_price'}}</h4>*@
-                </td>
-                <td>
-                    <h4>{{resultValue | sumOfValue:'sales_price'}}</h4>
-                </td>
-                <td>
-                    <h4>{{resultValue | sumOfValue:'total_price'}}</h4>
-                </td>
-            </tr>
+                <tbody>
+                    <div id="main-loader" ng-show="loading"><img src="~/Images/loader.gif" /></div>
+                    <tr ng-repeat="sale in resultValue = (sales | dateRange : dateStart : dateEnd | filter:{sales_product_des:filter.description || ''} | filter:{bill_no:filter.billNo || ''} | filter:{barCode:filter.barCode || ''} ) | pagination: curPage * pageSize | limitTo: pageSize">
+                        <td>
+                            {{serial($index+1)}}
+                        </td>
+                        <td>
+                            {{sale.date.slice(6,-2)  | date:'yyyy-MM-dd' }}
+                        </td>
+                        <td>
+                            {{sale.bill_no}}
+                        </td>
+                        <td>
+                            {{sale.sales_product_des}}
+                        </td>
+                        <td>
+                            {{sale.barCode}}
+                        </td>
+                        <td>
+                            {{sale.unit}}
+                        </td>
+                        <td>
+                            {{sale.qty}}
+                        </td>
+                        <td>
+                            {{sale.sales_price}}
+                        </td>
+                        <td>
+                            {{sale.total_price}}
+                        </td>
+                        @*<td>
+                            {{sale.qty * sale.sales_price}}
+                        </td>*@
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="center">
+                            <h4>Total</h4>
+                        </td>
+                        <td>
+                            <h4>{{resultValue | sumOfValue:'qty'}}</h4>
+                            @*<h4>Total Amount:{{resultValue | totalSumPriceQty:'qty':'sales_price'}}</h4>*@
+                        </td>
+                        <td>
+                            <h4>{{resultValue | sumOfValue:'sales_price'}}</h4>
+                        </td>
+                        <td>
+                            <h4>{{resultValue | sumOfValue:'total_price'}}</h4>
+                        </td>
+                    </tr>
 
-</tbody>
-        </table>
-        <div class="pagination pagination-centered" ng-show="resultValue.length">
-            <ul class="pagination-controle pagination">
-                <li>
-                    <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
-                            ng-click="curPage=curPage-1">
-                        &lt; PREV
-                    </button>
-                </li>
-                <li>
-                    <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-primary"
-                            ng-disabled="curPage >= datalists.length/pageSize - 1"
-                            ng-click="curPage = curPage+1">
-                        NEXT &gt;
-                    </button>
-                </li>
-            </ul>
+                </tbody>
+            </table>
+            <div class="pagination pagination-centered" ng-show="resultValue.length">
+                <ul class="pagination-controle pagination">
+                    <li>
+                        <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+                                ng-click="curPage=curPage-1">
+                            &lt; PREV
+                        </button>
+                    </li>
+                    <li>
+                        <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="curPage >= datalists.length/pageSize - 1"
+                                ng-click="curPage = curPage+1">
+                            NEXT &gt;
+                        </button>
+                    </li>
+                    <li>
+                        <button ng-click="exportToExcel('#tableToExport')" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-file"></i> Export</button>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-
-
-           
         </div>
-    
-    <div ng-show="divEmployee">
-        <p class="divHead">{{Action}} Employee</p>
-        <table>
-            <tr>
-                <td><b>Id</b></td>
-                <td>
-                    <input type="text" disabled="disabled" ng-model="employeeId" />
-                </td>
-            </tr>
-            <tr>
-                <td><b>Name</b></td>
-                <td>
-                    <input type="text" ng-model="employeeName" />
-                </td>
-            </tr>
-            <tr>
-                <td><b>Email</b></td>
-                <td>
-                    <input type="text" ng-model="employeeEmail" />
-                </td>
-            </tr>
-            <tr>
-                <td><b>Age</b></td>
-                <td>
-                    <input type="text" ng-model="employeeAge" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="button" class="btnAdd" value="Save" ng-click="AddUpdateEmployee()" />
-                </td>
-            </tr>
-        </table>
     </div>
-</div>
+
+            <div ng-show="divEmployee">
+                <p class="divHead">{{Action}} Employee</p>
+                <table>
+                    <tr>
+                        <td><b>Id</b></td>
+                        <td>
+                            <input type="text" disabled="disabled" ng-model="employeeId" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Name</b></td>
+                        <td>
+                            <input type="text" ng-model="employeeName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Email</b></td>
+                        <td>
+                            <input type="text" ng-model="employeeEmail" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Age</b></td>
+                        <td>
+                            <input type="text" ng-model="employeeAge" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="button" class="btnAdd" value="Save" ng-click="AddUpdateEmployee()" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
